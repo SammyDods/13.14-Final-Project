@@ -3,9 +3,6 @@ from random import *
 import os
 
 from Player import Player
-from Building import Building
-from Zombie import Zombie
-from Level import Level
 from Level_01 import Level_01
 
 #pygame.mixer.pre_init(44100,6,2,4096)
@@ -70,15 +67,10 @@ starttimer= 150000
 #newbackground = pygame.image.load("Assets\Sprites\background.png").convert()
 newbackground = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"background.png")).convert()
 newbackground=  pygame.transform.scale(newbackground,(5760,1080))
-
-
-
 bankimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"bank.png")).convert_alpha()
 bankimage = pygame.transform.scale(bankimage,(350,350))
-
 wallimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"Wall.png")).convert_alpha()
 wallimage = pygame.transform.scale(wallimage,(350,350))
-
 lasersound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "Assets", "Audio" , os.path.join(os.path.dirname(__file__), "Assets", "Audio" ,"laser.wav")))
 
 
@@ -103,7 +95,6 @@ def buybuildingwall():
         buildingshopopener.Building ="wall"
         buildingshopopener.health= 110
         buildingshopopener.image = wallimage
-
 
 def buybuildingbank():
     global money
@@ -176,12 +167,7 @@ def button(text, x, y, width, height, inactive_color, active_color, action = Non
 
     text_to_button(text,black,x,y,width,height)
 
-def randspeed():
-    ketchapp = randint(1,3)
-    if ketchapp >2:
-        return 6
-    else:
-        return 3
+
 
 def start():
     startingtext = True

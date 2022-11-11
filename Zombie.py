@@ -1,5 +1,5 @@
 import pygame
-import os
+from os.path import join, dirname as join_path, dirname
 
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
@@ -27,14 +27,11 @@ class Zombie(pygame.sprite.Sprite):
         #self.level = Level
 
     
-    def update(self):
+    def update(self, global_zombie_list):
         global playerhealth
         global money
         if self.health <= 0:
-            self.image = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"zombieblank.png")).convert_alpha()
-            self.damage=0
-            globalzombie_list.remove(self)
-            money+=10+wave*10
+            self.die()
         dist = 930 - self.rect.x
         if dist > 0:
             self.change = self.speed
@@ -45,11 +42,13 @@ class Zombie(pygame.sprite.Sprite):
             self.rect.x += self.change
             self.image = self.leftimage
         
-        hit = pygame.sprite.collide_rect(self, self.player)
-        if hit:
-            playerhealth-=self.damage
-        # Check and see if  the player
+        # Check and see if  the player got hit
         hit = pygame.sprite.collide_rect(self, self.player)
         if hit:
             playerhealth-=self.damage
 
+    def die(self):
+        self.image = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"zombieblank.png")).convert_alpha()
+        self.damage=0
+        global_zombie_list.remove(self)
+        money+=10+wave*10
