@@ -5,6 +5,7 @@ import time
 import random
 from random import *
 import gc
+import os
 
 #pygame.mixer.pre_init(44100,6,2,4096)
 pygame.init()
@@ -46,11 +47,8 @@ smallfont = pygame.font.SysFont("comicsansms", 25)
 medfont = pygame.font.SysFont("comicsansms", 50)
 largefont = pygame.font.SysFont("comicsansms", 85)
 
-
 #Suits
 starter = 0
-
-
 
 #VARIABLES
 buildingshop = False
@@ -70,21 +68,22 @@ wave = 0
 cooltext=""
 starttimer= 150000
 
-newbackground = pygame.image.load("background.png").convert()
+#newbackground = pygame.image.load("Assets\Sprites\background.png").convert()
+newbackground = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"background.png")).convert()
 newbackground=  pygame.transform.scale(newbackground,(5760,1080))
 
-sateliteimage = pygame.image.load("satelite.png").convert_alpha()
+sateliteimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"satelite.png")).convert_alpha()
 sateliteimage = pygame.transform.scale(sateliteimage,(350,350))
 
-bankimage = pygame.image.load("bank.png").convert_alpha()
+bankimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"bank.png")).convert_alpha()
 bankimage = pygame.transform.scale(bankimage,(350,350))
 
-wallimage = pygame.image.load("Wall.png").convert_alpha()
+wallimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"Wall.png")).convert_alpha()
 wallimage = pygame.transform.scale(wallimage,(350,350))
 
 
 
-lasersound = pygame.mixer.Sound("laser.wav")
+lasersound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "Assets", "Audio" , os.path.join(os.path.dirname(__file__), "Assets", "Audio" ,"laser.wav")))
 
 
 
@@ -147,7 +146,7 @@ class Player(pygame.sprite.Sprite):
         # List of sprites we can bump against
         self.level = None
  
-        sprite_sheet = SpriteSheet("playerwalking.png")
+        sprite_sheet = SpriteSheet(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" , "playerwalking.png"))
         # Load all the right facing images into a list
         image = sprite_sheet.get_image(0, 0, 80, 200)
         self.walking_frames_r.append(image)
@@ -210,7 +209,7 @@ class Player(pygame.sprite.Sprite):
         if suit == "mark2":
             self.damage = 10
             suit = "markii"
-            sprite_sheet = SpriteSheet("playerwalking2.png")
+            sprite_sheet = SpriteSheet(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"playerwalking2.png"))
             self.walking_frames_r.clear()
             self.walking_frames_l.clear()
             #print(self.walking_frames_l)
@@ -239,7 +238,7 @@ class Player(pygame.sprite.Sprite):
         if suit == "mark3":
             self.damage = 50
             suit = "markiii"
-            sprite_sheet = SpriteSheet("playerwalking3.png")
+            sprite_sheet = SpriteSheet(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"playerwalking3.png"))
             self.walking_frames_r.clear()
             self.walking_frames_l.clear()
             #print(self.walking_frames_l)
@@ -470,12 +469,12 @@ class Building(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface([width, height])
         self.image.fill(WHITE)
-        self.image = pygame.image.load("emptybuilding.png").convert_alpha()
+        self.image = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png")).convert_alpha()
         self.rect = self.image.get_rect()
         self.Building = buildingx
         self.health = 0
     def setimage(self, filename = None):
-        if (filname != None):
+        if (filename != None):
             self.image=pygame.image.load(filename)
             self.rect = self.image.get_rect()
         
@@ -514,7 +513,7 @@ class Building(pygame.sprite.Sprite):
 
         if self.health <= 0 and self.Building != None:
             self.Building=None
-            self.image = pygame.image.load("emptybuilding.png").convert_alpha()
+            self.image = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png")).convert_alpha()
             if self.Building == "bank":
                 nombanks -=1
 
@@ -607,7 +606,7 @@ class Zombie(pygame.sprite.Sprite):
         global playerhealth
         global money
         if self.health <= 0:
-            self.image = pygame.image.load("zombieblank.png").convert_alpha()
+            self.image = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"zombieblank.png")).convert_alpha()
             self.damage=0
             globalzombie_list.remove(self)
             money+=10+wave*10
@@ -724,7 +723,7 @@ class Level_01(Level):
             
         #buildings    
         building_1 = Building(350,350,None)
-        building_1.setimage = ( "emptybuilding.png" )
+        building_1.setimage = ( os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png") )
         building_1.rect.x = 3380
         building_1.rect.y = 730
         building_1.player = self.player
@@ -736,7 +735,7 @@ class Level_01(Level):
         building_2.rect.y = 730
         building_2.player = self.player
         building_2.level = self
-        building_2.setimage = ("emptybuilding.png")
+        building_2.setimage = ( os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png") )
         self.Building_list.add(building_2)
 
         building_3 = Building(350,350,None)
@@ -744,7 +743,7 @@ class Level_01(Level):
         building_3.rect.y = 730
         building_3.player = self.player
         building_3.level = self
-        building_3.setimage = ("emptybuilding.png")
+        building_3.setimage = (os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png") )
         self.Building_list.add(building_3)
 
         building_4 = Building(350,350,None)
@@ -752,7 +751,7 @@ class Level_01(Level):
         building_4.rect.y = 730
         building_4.player =self.player
         building_4.level = self
-        building_4.setimage = ("emptybuilding.png")
+        building_4.setimage = (os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png"))
         self.Building_list.add(building_4)   
 
         #creates Satelite    
@@ -774,7 +773,7 @@ class Level_01(Level):
             block.rect.x = platform[2]
             block.rect.y = platform[3]
             block.player = self.player
-            block.image = pygame.image.load("emptyimage.png").convert_alpha()
+            block.image = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"emptyimage.png")).convert_alpha()
             self.platform_list.add(block)
         
 
@@ -796,21 +795,21 @@ class Level_01(Level):
             if wave <6:
                 x=80
                 y=160
-                zombieimage = "zombie.png"
+                zombieimage = os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"zombie.png")
             else:
                 if randint(1,3) == 3:
                     x=121
                     y=250
-                    zombieimage= "largezombie.png"
+                    zombieimage= os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"largezombie.png")
                     life = 2*life
                 else:
                     x=80
                     y=160
-                    zombieimage = "zombie.png"
+                    zombieimage = os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"zombie.png")
             speed = randspeed()
             if speed > 3:
                 life=life/2
-            if zombieimage=="larezombie.png":
+            if zombieimage==os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"larezombie.png"):
                 speed=speed/2
             zombie=Zombie(x,y, life, speed, zombieimage)
             if randint(1,2) == 1:
@@ -827,7 +826,7 @@ class Level_01(Level):
 def start():
     startingtext = True
     message_to_screen("ZOMBINATOR",black,-450,size="large")
-    message_to_screen("By Sammy Dods 1/7/18",black,-300, size = "medium")
+    message_to_screen("By Sammy Dods",black,-300, size = "medium")
     message_to_screen("wasd: movement, q: interact p: pause mouse: aim and fire",black,-200, size = "small")
     message_to_screen("Press Space to Start",black,-150, size = "small")
 
@@ -844,9 +843,6 @@ def start():
                     elif event.key == pygame.K_q:
                         pygame.quit()
                         quit()
-
-
-        
 
 def pause():
 
@@ -951,7 +947,7 @@ def main():
 
 
     #Background music
-    pygame.mixer.music.load("ChasingGhosts.mp3")
+    pygame.mixer.music.load(os.path.join(os.path.dirname(__file__), "Assets", "Audio" , os.path.join(os.path.dirname(__file__), "Assets", "Audio" ,"ChasingGhosts.mp3")))
     pygame.mixer.music.set_volume(0.2)
     pygame.mixer.music.play(-1)
     startingnow = True
@@ -1096,8 +1092,6 @@ def main():
         active_sprite_list.draw(screen)
         globalzombie_list.draw(screen)
 
-
-
         if buildingshop == True:
             button("Buy wall (350)", 650,500,200,100, green, light_green, action="buywall")
             button("Buy bank (450)", 1110,500,200,100, yellow, light_yellow, action="buybank")
@@ -1131,10 +1125,8 @@ def main():
         clock.tick(60)
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
-     
 
-    # Be IDLE friendly. If you forget this line, the program will 'hang'
-    # on exit. 
+    # Be IDLE friendly. If you forget this line, the program will 'hang'on exit. 
     pygame.quit()
 
 if __name__ == "__main__":
