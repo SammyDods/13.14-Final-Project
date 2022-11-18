@@ -371,7 +371,11 @@ def main():
             zombie_hit_list = pygame.sprite.spritecollide(bullet, zombie_list, False)
             # For each block hit, remove the bullet and add to the score
             for zombie in zombie_hit_list:
-                zombie.health -= player.damage
+                zombie.take_damage(player.damage)
+                if zombie.is_dead():
+                    zombie.die()
+                    zombie_list.remove(zombie)
+                    money+=10+wave*10
                 bullet_list.remove(bullet)
                 active_sprite_list.remove(bullet)
             # Remove the bullet if it flies up off the screen
@@ -381,15 +385,9 @@ def main():
 
         #calculate zombbie collisions
         for zombie in zombie_list:
-            # Check and see if  the player is in buying area
-            hit = pygame.sprite.collide_rect(self, self.player)
-            if hit and q == True :
-                sateiteshop = True
-            # Check and see if  the player is in buying area
-            hit = pygame.sprite.collide_rect(self, self.player)
-            if hit and q == True :
-                sateliteshop = True 
-                pass
+            hit = pygame.sprite.collide_rect(zombie, player)
+            if hit:
+                zombie.attack(player)
             
         # If the player gets near the right side, shift the world left (-x)
         if player.rect.right >= 1020:
@@ -442,19 +440,8 @@ def main():
         moneyscore(money)
         wavescore(wave)
 
-        for zombie in zombie_list:
-            print(zombie.health)
-
-        #if game ends
-        
-        myfont = pygame.font.SysFont('Comic Sans MS', 50)
-        textsurface = myfont.render('Finished!', False, (0, 0, 0))
-        textsurface2 = myfont.render(str(cooltext), False, (0, 0, 0))
-
+        #if game ends     
         if playerhealth <= 0:
-            #pygame.display.set_mode().fill((255, 255, 255))
-            #screen.blit(textsurface,(290,250))
-            #screen.blit(textsurface2,(290,500))
             endgamescreen()
 
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT

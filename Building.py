@@ -24,6 +24,8 @@ class Bank(Building):
         bank_image = pygame.transform.scale(bank_image,(350,350))
         self.set_image(bank_image)
         self.building_type = "Bank"
+    def update(self):
+        pass
 
 class Wall(Building):
     def __init__(self, width, height, buildingx):
@@ -34,7 +36,7 @@ class Wall(Building):
         self.building_type = "Wall"  
   
     def update(self):
-
+        pass
 
 """
 

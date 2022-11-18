@@ -210,5 +210,9 @@ class Player(pygame.sprite.Sprite):
     def stop(self): 
         self.change_x = 0
 
+    def take_damage(self, damage):
+        self.health -= damage
+
+
         
     

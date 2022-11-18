@@ -23,7 +23,6 @@ class Zombie(pygame.sprite.Sprite):
         #self.player= Level.player
         #self.level = Level
 
-    
     def update(self, global_zombie_list):
         global playerhealth
         global money
@@ -38,14 +37,20 @@ class Zombie(pygame.sprite.Sprite):
             self.change = -1*self.speed
             self.rect.x += self.change
             self.image = self.leftimage
-        
-        # Check and see if  the player got hit
-        hit = pygame.sprite.collide_rect(self, self.player)
-        if hit:
-            playerhealth-=self.damage
 
     def die(self):
         self.image = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"zombieblank.png")).convert_alpha()
-        self.damage=0
-        global_zombie_list.remove(self)
-        money+=10+wave*10
+        self.damage=0        
+
+    def attack(self, player):
+        player.take_damage(self.damage)
+
+    def take_damage(self, damage):
+        self.health -= damage
+    
+    def is_dead(self):
+        if self.heath < 0:
+            return True
+        else:
+            return False
+
