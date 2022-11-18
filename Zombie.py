@@ -1,5 +1,5 @@
 import pygame
-from os.path import join, dirname as join_path, dirname
+from os.path import join as join_path, dirname
 from Settings import SCREEN_HEIGHT, WHITE
 
 class Zombie(pygame.sprite.Sprite):

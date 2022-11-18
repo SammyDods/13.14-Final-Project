@@ -6,7 +6,7 @@ from Player import Player
 from Level_01 import Level_01
 from Bullet import Bullet
 from Settings import SCREEN_HEIGHT, SCREEN_WIDTH, SMALLFONT, MEDFONT, LARGEFONT
-from Settings import WHITE, BLACK, GREEN, RED, BLUE, YELLOW, LIGHT_GREEN, LIGHT_YELLOW
+from Settings import WHITE, BLACK, GREEN, YELLOW, LIGHT_GREEN, LIGHT_YELLOW
 
 #pygame.mixer.pre_init(44100,6,2,4096)
 pygame.init()
@@ -442,6 +442,10 @@ def main():
 
         #if game ends     
         if playerhealth <= 0:
+
+
+
+
             endgamescreen()
 
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT

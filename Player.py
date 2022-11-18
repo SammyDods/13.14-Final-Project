@@ -1,7 +1,7 @@
 import pygame
 import os
 from SpriteSheet import SpriteSheet
-from Settings import SCREEN_HEIGHT, SCREEN_WIDTH, WHITE
+from Settings import SCREEN_HEIGHT, WHITE
 
 class Player(pygame.sprite.Sprite):
     global endgame

@@ -1,6 +1,8 @@
 #Settings for game, used by mutliple files
 import pygame
 
+pygame.init()
+
 # Screen dimensions
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
