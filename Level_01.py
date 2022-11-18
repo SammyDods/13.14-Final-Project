@@ -6,8 +6,7 @@ from Platform import Platform
 from Satelite import Satelite
 from random import randint
 from os.path import join, dirname as join_path, dirname
-
-WHITE = (255, 255, 255)
+from Settings import WHITE
 
 def randspeed():
     ketchapp = randint(1,3)

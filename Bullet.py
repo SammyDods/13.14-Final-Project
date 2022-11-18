@@ -1,9 +1,6 @@
 import pygame
 from math import sin, cos, atan2
-
-BLUE = (0, 0, 255)
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
+from Settings import SCREEN_HEIGHT, SCREEN_WIDTH, BLUE
 
 class Bullet(pygame.sprite.Sprite):
     """ This class represents the bullet. """

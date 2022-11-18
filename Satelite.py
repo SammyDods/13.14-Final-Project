@@ -1,7 +1,7 @@
 import pygame
 from os.path import join, dirname as join_path, dirname
+from Settings import RED
 
-RED = (255, 0, 0)
 sateliteimage = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"satelite.png")).convert_alpha()
 sateliteimage = pygame.transform.scale(sateliteimage,(350,350))
 

@@ -1,10 +1,7 @@
 import pygame
 import os
 from SpriteSheet import SpriteSheet
-
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
-WHITE = (255, 255, 255)
+from Settings import SCREEN_HEIGHT, SCREEN_WIDTH, WHITE
 
 class Player(pygame.sprite.Sprite):
     global endgame
@@ -212,6 +209,10 @@ class Player(pygame.sprite.Sprite):
     #When player lets go
     def stop(self): 
         self.change_x = 0
+
+    def take_damage(self, damage):
+        self.health -= damage
+
 
         
     
