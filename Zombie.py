@@ -1,9 +1,6 @@
 import pygame
 from os.path import join, dirname as join_path, dirname
-
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
-WHITE = (255, 255, 255)
+from Settings import SCREEN_HEIGHT, WHITE
 
 class Zombie(pygame.sprite.Sprite):
     global zombie_list

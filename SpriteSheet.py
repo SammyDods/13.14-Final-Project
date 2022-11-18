@@ -1,5 +1,5 @@
 import pygame
-BLACK = (0, 0, 0)
+from Settings import BLACK
 
 class SpriteSheet(object):
     """ Class used to grab images out of a sprite sheet. """

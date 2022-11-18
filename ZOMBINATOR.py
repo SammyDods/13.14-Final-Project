@@ -4,12 +4,12 @@ import os
 
 from Player import Player
 from Level_01 import Level_01
+from Bullet import Bullet
+from Settings import SCREEN_HEIGHT, SCREEN_WIDTH, SMALLFONT, MEDFONT, LARGEFONT
+from Settings import WHITE, BLACK, GREEN, RED, BLUE, YELLOW, LIGHT_GREEN, LIGHT_YELLOW
 
 #pygame.mixer.pre_init(44100,6,2,4096)
 pygame.init()
-# Screen dimensions
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
 
 # Set the height and width of the screen
 gameDisplay = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
@@ -22,27 +22,8 @@ pygame.display.set_caption('Tanks')
 #pygame.display.set_icon(icon)
 
 # Global constants
-# Colors
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-BLUE = (0, 0, 255)
-
-white = (255,255,255)
-black = (0,0,0)
-red = (200,0,0)
-light_red = (255,0,0)
-yellow = (200,200,0)
-light_yellow = (255,255,0)
-green = (34,177,76)
-light_green = (0,255,0)
 
 clock = pygame.time.Clock()
-
-smallfont = pygame.font.SysFont("comicsansms", 25)
-medfont = pygame.font.SysFont("comicsansms", 50)
-largefont = pygame.font.SysFont("comicsansms", 85)
-
 #Suits
 starter = 0
 
@@ -54,9 +35,9 @@ done1=0
 money=0
 Building_list = [0,0]
 zombie_list=[0,0]
-globalzombie_list= pygame.sprite.Group()
+zombie_list= pygame.sprite.Group()
 buildingshopopener = None
-nombanks = 0
+num_banks = 0
 banking = 0
 suit = starter
 playerhealth = 1
@@ -78,33 +59,35 @@ player = Player()
 
 #Define Functions
 def moneyscore(money):
-    text = smallfont.render("Money: "+str(money), True, WHITE)
+    text = SMALLFONT.render("Money: "+str(money), True, WHITE)
     gameDisplay.blit(text, [0,0])
 
 def wavescore(wave):
-    text = smallfont.render("Wave: "+str(wave), True, WHITE)
+    text = SMALLFONT.render("Wave: "+str(wave), True, WHITE)
     gameDisplay.blit(text, [0,50])
 
 def buybuildingwall():
     global money
-    global nombanks
+    global num_banks
     if money >= 300 and buildingshopopener.Building != "wall":
         money += -300
         if buildingshopopener.Building=="bank":
-            nombanks-=1
+            num_banks-=1
         buildingshopopener.Building ="wall"
         buildingshopopener.health= 110
         buildingshopopener.image = wallimage
 
 def buybuildingbank():
     global money
-    global nombanks
+    global num_banks
     if money >= 450 and buildingshopopener.Building != "bank":
         money += -450
         buildingshopopener.Building ="bank"
         buildingshopopener.health= 15
         buildingshopopener.image = bankimage
-        nombanks+=1
+        num_banks+=1
+def buy_building(building_name, money):
+    pass
 
 
 def buymark2():
@@ -129,11 +112,11 @@ def buymark3():
 def text_objects(text, color,size = "small"):
 
     if size == "small":
-        textSurface = smallfont.render(text, True, color)
+        textSurface = SMALLFONT.render(text, True, color)
     if size == "medium":
-        textSurface = medfont.render(text, True, color)
+        textSurface = MEDFONT.render(text, True, color)
     if size == "large":
-        textSurface = largefont.render(text, True, color)
+        textSurface = LARGEFONT.render(text, True, color)
 
     return textSurface, textSurface.get_rect()
 
@@ -165,16 +148,16 @@ def button(text, x, y, width, height, inactive_color, active_color, action = Non
     else:
         pygame.draw.rect(screen, inactive_color, (x,y,width,height))
 
-    text_to_button(text,black,x,y,width,height)
+    text_to_button(text,BLACK,x,y,width,height)
 
 
 
 def start():
     startingtext = True
-    message_to_screen("ZOMBINATOR",black,-450,size="large")
-    message_to_screen("By Sammy Dods",black,-300, size = "medium")
-    message_to_screen("wasd: movement, q: interact p: pause mouse: aim and fire",black,-200, size = "small")
-    message_to_screen("Press Space to Start",black,-150, size = "small")
+    message_to_screen("ZOMBINATOR",BLACK,-450,size="large")
+    message_to_screen("By Sammy Dods",BLACK,-300, size = "medium")
+    message_to_screen("wasd: movement, q: interact p: pause mouse: aim and fire",BLACK,-200, size = "small")
+    message_to_screen("Press Space to Start",BLACK,-150, size = "small")
 
     pygame.display.update()
     starttimer= 15000
@@ -194,8 +177,8 @@ def pause():
 
     paused = True
     screen.fill(WHITE)
-    message_to_screen("Paused",black,-450,size="large")
-    message_to_screen("Press E to continue playing or Q to quit",black,25)
+    message_to_screen("Paused",BLACK,-450,size="large")
+    message_to_screen("Press E to continue playing or Q to quit",BLACK,25)
     pygame.display.update()
     while paused:
         for event in pygame.event.get():
@@ -214,9 +197,9 @@ def endgamescreen():
     endgame = True
     cooltext  = "You survived",wave,"waves"
     screen.fill(WHITE)
-    message_to_screen("DEATH",black,-450,size="large")
-    message_to_screen(str(cooltext),black,-300, size = "medium")
-    message_to_screen("Press q to quit",black,-200, size = "small")
+    message_to_screen("DEATH",BLACK,-450,size="large")
+    message_to_screen(str(cooltext),BLACK,-300, size = "medium")
+    message_to_screen("Press q to quit",BLACK,-200, size = "small")
     pygame.display.update()
     while endgame == True:
         for event in pygame.event.get():
@@ -228,9 +211,6 @@ def endgamescreen():
                         pygame.quit()
                         quit()
 
-
-
- 
 #for i in range(50):
     # This represents a block
     #block = Block(BLUE)
@@ -247,7 +227,7 @@ def main():
     pygame.init()
     global bullet_list
     global zombie_list
-    global globalzombie_list
+    global zombie_list
 
     # --- Sprite lists
     # This is a list of every sprite. All blocks and the player block as well.
@@ -255,7 +235,7 @@ def main():
     # List of each block in the game
     block_list = pygame.sprite.Group()
     zombie_list= pygame.sprite.Group()
-    globalzombie_list = pygame.sprite.Group()
+    zombie_list = pygame.sprite.Group()
     
     # List of each bullet
     bullet_list = pygame.sprite.Group()
@@ -373,9 +353,9 @@ def main():
         reload -= 1
         # Call the update() method on all the sprites
         #Calles wave function when there are no zombies
-        #print(globalzombie_list.sprites())
-        if not globalzombie_list.sprites():
-            #print(globalzombie_list.sprites())
+        #print(zombie_list.sprites())
+        if not zombie_list.sprites():
+            #print(zombie_list.sprites())
             wave+=1
             noice=Level_01(player)
             noice.wavefunc()
@@ -388,7 +368,7 @@ def main():
         # Calculate mechanics for each bullet
         for bullet in bullet_list:
             # See if it hit a block
-            zombie_hit_list = pygame.sprite.spritecollide(bullet, globalzombie_list, False)
+            zombie_hit_list = pygame.sprite.spritecollide(bullet, zombie_list, False)
             # For each block hit, remove the bullet and add to the score
             for zombie in zombie_hit_list:
                 zombie.health -= player.damage
@@ -397,7 +377,19 @@ def main():
             # Remove the bullet if it flies up off the screen
             if bullet.rect.y < -10:
                 bullet_list.remove(bullet)
-                all_sprites_list.remove(bullet)
+                active_sprite_list.remove(bullet)
+
+        #calculate zombbie collisions
+        for zombie in zombie_list:
+            # Check and see if  the player is in buying area
+            hit = pygame.sprite.collide_rect(self, self.player)
+            if hit and q == True :
+                sateiteshop = True
+            # Check and see if  the player is in buying area
+            hit = pygame.sprite.collide_rect(self, self.player)
+            if hit and q == True :
+                sateliteshop = True 
+                pass
             
         # If the player gets near the right side, shift the world left (-x)
         if player.rect.right >= 1020:
@@ -419,7 +411,7 @@ def main():
         current_level.update()
 
         #banks
-        banking += 2*nombanks
+        banking += 2*num_banks
         if banking >= 30:
             money+=2
             banking= 0
@@ -436,15 +428,15 @@ def main():
         # Draw all the spites
         current_level.draw(screen)
         active_sprite_list.draw(screen)
-        globalzombie_list.draw(screen)
+        zombie_list.draw(screen)
 
         if buildingshop == True:
-            button("Buy wall (350)", 650,500,200,100, green, light_green, action="buywall")
-            button("Buy bank (450)", 1110,500,200,100, yellow, light_yellow, action="buybank")
+            button("Buy wall (350)", 650,500,200,100, LIGHT_GREEN, GREEN, action="buywall")
+            button("Buy bank (450)", 1110,500,200,100, YELLOW, LIGHT_YELLOW, action="buybank")
 
         if sateliteshop == True:
-            button("Buy Mark II (1000)", 600,500,300,100, green, light_green, action="buymark2")
-            button("Buy Mark III (5000)", 1150,500,300,100, yellow, light_yellow, action="buymark3")
+            button("Buy Mark II (1000)", 600,500,300,100, LIGHT_GREEN, GREEN, action="buymark2")
+            button("Buy Mark III (5000)", 1150,500,300,100, YELLOW, LIGHT_YELLOW, action="buymark3")
 
         #score
         moneyscore(money)

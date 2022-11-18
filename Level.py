@@ -1,6 +1,5 @@
 import pygame
-
-BLUE = (0, 0, 255)
+from Settings import BLUE
 
 class Level(object):
     world_shift = 0
