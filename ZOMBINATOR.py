@@ -46,8 +46,6 @@ cooltext=""
 starttimer= 150000
 
 #newbackground = pygame.image.load("Assets\Sprites\background.png").convert()
-newbackground = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"background.png")).convert()
-newbackground=  pygame.transform.scale(newbackground,(5760,1080))
 bankimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"bank.png")).convert_alpha()
 bankimage = pygame.transform.scale(bankimage,(350,350))
 wallimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"Wall.png")).convert_alpha()
@@ -233,7 +231,6 @@ def main():
     # This is a list of every sprite. All blocks and the player block as well.
 
     # List of each block in the game
-    block_list = pygame.sprite.Group()
     zombie_list= pygame.sprite.Group()
     zombie_list = pygame.sprite.Group()
     
@@ -357,8 +354,8 @@ def main():
         if not zombie_list.sprites():
             #print(zombie_list.sprites())
             wave+=1
-            noice=Level_01(player)
-            noice.wavefunc()
+            level_01=Level_01(player)
+            level_01.wavefunc(wave, zombie_list)
             #print("it worked?!")
         if startingnow == True:
             startingnow=False
@@ -442,10 +439,6 @@ def main():
 
         #if game ends     
         if playerhealth <= 0:
-
-
-
-
             endgamescreen()
 
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT

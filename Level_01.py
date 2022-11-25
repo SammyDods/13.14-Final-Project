@@ -17,42 +17,34 @@ def randspeed():
 
 class Level_01(Level):
     global globalzombie_list
-    global newbackground
     def __init__(self, player):
  
         Level.__init__(self, player)
-
-        self.background = newbackground
+        background = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"background.png")).convert()
+        background=  pygame.transform.scale(background,(5760,1080))
+        self.background = background
         self.background.set_colorkey(WHITE)
             
         #buildings    
-        building_1 = Building(350,350,None)
+        building_1 = Building(350,350, 3380, 730)
         building_1.setimage = ( join_path(dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png") )
-        building_1.rect.x = 3380
-        building_1.rect.y = 730
         building_1.player = self.player
         building_1.level = self
         self.Building_list.add(building_1)
 
-        building_2 = Building(350,350,None)
-        building_2.rect.x = 3880
-        building_2.rect.y = 730
+        building_2 = Building(350,350, 3880, 730)
         building_2.player = self.player
         building_2.level = self
         building_2.setimage = ( join_path(dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png") )
         self.Building_list.add(building_2)
 
-        building_3 = Building(350,350,None)
-        building_3.rect.x = 2380
-        building_3.rect.y = 730
+        building_3 = Building(350,350, 2380, 730)
         building_3.player = self.player
         building_3.level = self
         building_3.setimage = (join_path(dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png") )
         self.Building_list.add(building_3)
 
-        building_4 = Building(350,350,None)
-        building_4.rect.x = 1880
-        building_4.rect.y = 730
+        building_4 = Building(350, 350, 1880, 730)
         building_4.player =self.player
         building_4.level = self
         building_4.setimage = (join_path(dirname(__file__), "Assets", "Sprites" ,"emptybuilding.png"))
@@ -88,10 +80,7 @@ class Level_01(Level):
         #self.zombie_list.add(zombie_1)
         #globalzombie_list.add(zombie_1)
 
-    def wavefunc(self):    
-        global wave
-        global globalzombie_list
-        global zombie_list
+    def wavefunc(self, wave, zombie_list):
             
         newwave = wave*2
         for x in range(0,newwave):
@@ -123,6 +112,3 @@ class Level_01(Level):
             zombie.player = self.player
             zombie.level = self
             globalzombie_list.add(zombie)
-
-#Level.Level_01.printwow()
-#Level.printme()
