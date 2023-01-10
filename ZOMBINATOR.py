@@ -172,7 +172,6 @@ def start():
                         quit()
 
 def pause():
-
     paused = True
     screen.fill(WHITE)
     message_to_screen("Paused",BLACK,-450,size="large")

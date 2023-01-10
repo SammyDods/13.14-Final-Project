@@ -90,63 +90,6 @@ class Player(pygame.sprite.Sprite):
             elif self.change_x < 0:
                 # Otherwise if we are moving left, do the opposite.
                 self.rect.left = block.rect.right
-
-        if suit == "mark2":
-            self.damage = 10
-            suit = "markii"
-            sprite_sheet = SpriteSheet(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"playerwalking2.png"))
-            self.walking_frames_r.clear()
-            self.walking_frames_l.clear()
-            #print(self.walking_frames_l)
-            # Load all the right facing images into a list
-            image = sprite_sheet.get_image(0, 0, 80, 200)
-            self.walking_frames_r.append(image)
-            image = sprite_sheet.get_image(80, 0, 80, 200)
-            self.walking_frames_r.append(image)
-            image = sprite_sheet.get_image(160, 0, 80, 200)
-            self.walking_frames_r.append(image)
-           
-     
-            # Load all the right facing images, then flip them
-            # to face left.
-            image = sprite_sheet.get_image(0, 0, 80, 200)
-            image = pygame.transform.flip(image, True, False)
-            self.walking_frames_l.append(image)
-            image = sprite_sheet.get_image(80, 0, 80, 200)
-            image = pygame.transform.flip(image, True, False)
-            self.walking_frames_l.append(image)
-            image = sprite_sheet.get_image(160, 0, 80, 200)
-            image = pygame.transform.flip(image, True, False)
-            self.walking_frames_l.append(image)
-
-            
-        if suit == "mark3":
-            self.damage = 50
-            suit = "markiii"
-            sprite_sheet = SpriteSheet(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"playerwalking3.png"))
-            self.walking_frames_r.clear()
-            self.walking_frames_l.clear()
-            #print(self.walking_frames_l)
-            # Load all the right facing images into a list
-            image = sprite_sheet.get_image(0, 0, 80, 200)
-            self.walking_frames_r.append(image)
-            image = sprite_sheet.get_image(80, 0, 80, 200)
-            self.walking_frames_r.append(image)
-            image = sprite_sheet.get_image(160, 0, 80, 200)
-            self.walking_frames_r.append(image)
-           
-     
-            # Load all the right facing images, then flip them
-            # to face left.
-            image = sprite_sheet.get_image(0, 0, 80, 200)
-            image = pygame.transform.flip(image, True, False)
-            self.walking_frames_l.append(image)
-            image = sprite_sheet.get_image(80, 0, 80, 200)
-            image = pygame.transform.flip(image, True, False)
-            self.walking_frames_l.append(image)
-            image = sprite_sheet.get_image(160, 0, 80, 200)
-            image = pygame.transform.flip(image, True, False)
-            self.walking_frames_l.append(image)
  
         # Move up/down
         self.rect.y += self.change_y
@@ -163,17 +106,6 @@ class Player(pygame.sprite.Sprite):
  
             # Stop our vertical movement
             self.change_y = 0
-
-
-        #def suit(self, suit):
-           # if suit == "mark2":
-               # self.damage=2
-             #   sprite_sheet = SpriteSheet("p1_walk.png")
-          #  if suit == "mark3":
-              #  self.damage= 3
-             #   sprite_sheet = SpriteSheet("p1_walk.png")
-
-       
 
     def findselfrect(self):
         return self.rectdw
@@ -213,6 +145,33 @@ class Player(pygame.sprite.Sprite):
     def take_damage(self, damage):
         self.health -= damage
 
+    def change_suit(self, suit):
 
+        self.suit = suit
+        suits_damages = {"marki" : 1, "markii" : 10, "markiii" : 50}
+
+        self.damage = suits_damages[suit]
+        sprite_sheet = SpriteSheet(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" , suit + ".png"))
+        self.walking_frames_r.clear()
+        self.walking_frames_l.clear()
+        
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(0, 0, 80, 200)
+        self.walking_frames_r.append(image)
+        image = sprite_sheet.get_image(80, 0, 80, 200)
+        self.walking_frames_r.append(image)
+        image = sprite_sheet.get_image(160, 0, 80, 200)
+        self.walking_frames_r.append(image)
+           
+        # Load all the right facing images, then flip them to face left.
+        image = sprite_sheet.get_image(0, 0, 80, 200)
+        image = pygame.transform.flip(image, True, False)
+        self.walking_frames_l.append(image)
+        image = sprite_sheet.get_image(80, 0, 80, 200)
+        image = pygame.transform.flip(image, True, False)
+        self.walking_frames_l.append(image)
+        image = sprite_sheet.get_image(160, 0, 80, 200)
+        image = pygame.transform.flip(image, True, False)
+        self.walking_frames_l.append(image)
         
     

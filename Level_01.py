@@ -111,4 +111,4 @@ class Level_01(Level):
                 zombie.rect.x = 4000-randint(1,600)
             zombie.player = self.player
             zombie.level = self
-            globalzombie_list.add(zombie)
+            zombie_list.add(zombie)
