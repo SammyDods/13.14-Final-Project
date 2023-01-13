@@ -1,7 +1,8 @@
-# Grade 10 Zombie PyGame
- A shooter/strategy zombie game I made in grade 10 using the Pygame python module
+# Zombinator - Zombie PyGame
 
-This is a very rough around the edges project that I started and finished in the last week of my grade 10 winter break for my final project. It's not the most polished code ever but I learned a lot about object oriented programming during the process. I was a lot more comfortable at the end and if I had more time I could have created more content. Maybe if I get bored I'll add more!
+### Currently refactoring the code, for a functional version please checkout the origonal commit.
+
+A shooter/strategy zombie game using the Pygame python module
 
 I adapted the sprite animation, movement, and bullets from http://programarcadegames.com/index.php
 This website was where I learned most of my pygame, and I could not have built this project without it.
