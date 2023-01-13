@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
         # List of sprites we can bump against
         self.level = None
  
-        sprite_sheet = SpriteSheet(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" , "playerwalking.png"))
+        sprite_sheet = SpriteSheet(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" , "marki.png"))
         # Load all the right facing images into a list
         image = sprite_sheet.get_image(0, 0, 80, 200)
         self.walking_frames_r.append(image)

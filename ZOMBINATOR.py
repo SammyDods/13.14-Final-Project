@@ -13,16 +13,14 @@ pygame.init()
 
 # Set the height and width of the screen
 gameDisplay = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-
 size = [SCREEN_WIDTH, SCREEN_HEIGHT]
 screen = pygame.display.set_mode((size),pygame.FULLSCREEN) 
-pygame.display.set_caption("Pygame Test")
-pygame.display.set_caption('Tanks')
+pygame.display.set_caption("Zombinator")
+
 #icon = pygame.image.load("apple.png")       
 #pygame.display.set_icon(icon)
 
 # Global constants
-
 clock = pygame.time.Clock()
 #Suits
 starter = 0
@@ -50,7 +48,7 @@ bankimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", 
 bankimage = pygame.transform.scale(bankimage,(350,350))
 wallimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"Wall.png")).convert_alpha()
 wallimage = pygame.transform.scale(wallimage,(350,350))
-lasersound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "Assets", "Audio" , os.path.join(os.path.dirname(__file__), "Assets", "Audio" ,"laser.wav")))
+lasersound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "Assets", "Audio" ,"laser.wav"))
 
 
 player = Player()
@@ -84,6 +82,7 @@ def buybuildingbank():
         buildingshopopener.health= 15
         buildingshopopener.image = bankimage
         num_banks+=1
+
 def buy_building(building_name, money):
     pass
 
@@ -97,7 +96,6 @@ def buymark2():
         #player.mark2()
         suit = "mark2"
         
-
 def buymark3():
     global money
     global suit
@@ -105,10 +103,8 @@ def buymark3():
         money += -5000
         player.damage=50
         suit = "mark3"
-        
-                    
+              
 def text_objects(text, color,size = "small"):
-
     if size == "small":
         textSurface = SMALLFONT.render(text, True, color)
     if size == "medium":
@@ -147,8 +143,6 @@ def button(text, x, y, width, height, inactive_color, active_color, action = Non
         pygame.draw.rect(screen, inactive_color, (x,y,width,height))
 
     text_to_button(text,BLACK,x,y,width,height)
-
-
 
 def start():
     startingtext = True
@@ -208,17 +202,6 @@ def endgamescreen():
                         pygame.quit()
                         quit()
 
-#for i in range(50):
-    # This represents a block
-    #block = Block(BLUE)
- 
-    # Set a random location for the block
-    #block.rect.x = random.randrange(SCREEN_WIDTH)
-    #block.rect.y = random.randrange(SCREEN_HEIGHT - 50)
- 
-    # Add the block to the list of objects
-    #block_list.add(block)
-    #all_sprites_list.add(block)
 
 def main():
     pygame.init()
