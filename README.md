@@ -2,7 +2,7 @@
 
 ### Currently refactoring the code, for a functional version please checkout the origonal commit.
 
-A shooter/strategy zombie game using the Pygame python module
+A shooter/strategy zombie game using the PyGame python module
 
 I adapted the sprite animation, movement, and bullets from http://programarcadegames.com/index.php
 This website was where I learned most of my pygame, and I could not have built this project without it.
