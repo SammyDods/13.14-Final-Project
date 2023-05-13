@@ -1,12 +1,14 @@
 import pygame
 from random import *
-import os
+from os.path import join as join_path, dirname
 
 from Player import Player
 from Level_01 import Level_01
 from Bullet import Bullet
-from Settings import SCREEN_HEIGHT, SCREEN_WIDTH, SMALLFONT, MEDFONT, LARGEFONT
-from Settings import WHITE, BLACK, GREEN, YELLOW, LIGHT_GREEN, LIGHT_YELLOW
+from Settings import SCREEN_HEIGHT, SCREEN_WIDTH
+from Settings import WHITE, GREEN, YELLOW, LIGHT_GREEN, LIGHT_YELLOW
+
+from Gui import start, pause, wavescore, endgamescreen
 
 #pygame.mixer.pre_init(44100,6,2,4096)
 pygame.init()
@@ -44,18 +46,13 @@ cooltext=""
 starttimer= 150000
 
 #newbackground = pygame.image.load("Assets\Sprites\background.png").convert()
-bankimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"bank.png")).convert_alpha()
+bankimage = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"bank.png")).convert_alpha()
 bankimage = pygame.transform.scale(bankimage,(350,350))
-wallimage = pygame.image.load(os.path.join(os.path.dirname(__file__), "Assets", "Sprites" ,"Wall.png")).convert_alpha()
+wallimage = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"Wall.png")).convert_alpha()
 wallimage = pygame.transform.scale(wallimage,(350,350))
-lasersound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "Assets", "Audio" ,"laser.wav"))
-
+lasersound = pygame.mixer.Sound(join_path(dirname(__file__), "Assets", "Audio" ,"laser.wav"))
 
 player = Player()
-
-#Define Functions
-
-
 
 
 def main():
@@ -107,21 +104,12 @@ def main():
 
 
     #Background music
-    pygame.mixer.music.load(os.path.join(os.path.dirname(__file__), "Assets", "Audio" , os.path.join(os.path.dirname(__file__), "Assets", "Audio" ,"ChasingGhosts.mp3")))
+    pygame.mixer.music.load(join_path(join_path(__file__), "Assets", "Audio" , join_path(dirname(__file__), "Assets", "Audio" ,"ChasingGhosts.mp3")))
     pygame.mixer.music.set_volume(0.2)
     pygame.mixer.music.play(-1)
     startingnow = True
      
     # -------- Main Program Loop -----------
-    global done1
-    global q
-    global buildingshop
-    global sateliteshop
-    global money
-    global banking
-    global playerhealth
-    global wave
-    global start1
     start1=True
     reload = 15
     while not done:

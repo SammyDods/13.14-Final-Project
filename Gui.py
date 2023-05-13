@@ -1,7 +1,7 @@
 import pygame
 from Settings import SCREEN_WIDTH, SMALLFONT, MEDFONT, LARGEFONT
 from Settings import WHITE, BLACK
-
+from Shop import buybuildingwall, buybuildingbank, buymark2, buymark3
 
 def text_objects(text, color,size = "small"):
     if size == "small":
@@ -31,7 +31,7 @@ def wavescore(gameDisplay, wave):
     text = SMALLFONT.render("Wave: "+str(wave), True, WHITE)
     gameDisplay.blit(text, [0,50])
 
-def button(gameDisplay, text, x, y, width, height, inactive_color, active_color, action = None):
+def button(gameDisplay, player, screen, text, x, y, width, height, inactive_color, active_color, action = None):
     cur = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     if x + width > cur[0] > x and y + height > cur[1] > y:
@@ -42,15 +42,15 @@ def button(gameDisplay, text, x, y, width, height, inactive_color, active_color,
             if action == "buybank":
                 buybuildingbank()
             if action == "buymark2":
-                buymark2()
+                buymark2(player)
             if action == "buymark3":
-                buymark3()
+                buymark3(player)
     else:
         pygame.draw.rect(screen, inactive_color, (x,y,width,height))
 
     text_to_button(text,BLACK,x,y,width,height)
 
-def endgamescreen(screen):
+def endgamescreen(screen, wave):
     global cooltext
     endgame = True
     cooltext  = "You survived",wave,"waves"

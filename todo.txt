@@ -1,0 +1,2 @@
+Correct GUI function interactions with main game class
+Refactor shop Functions

@@ -1,6 +1,12 @@
 import pygame
+from os.path import join as join_path, dirname
 
-def buybuildingwall():
+bankimage = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"bank.png")).convert_alpha()
+bankimage = pygame.transform.scale(bankimage,(350,350))
+wallimage = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"Wall.png")).convert_alpha()
+wallimage = pygame.transform.scale(wallimage,(350,350))
+
+def buybuildingwall(buildingshopopener):
     global money
     global num_banks
     if money >= 300 and buildingshopopener.Building != "wall":
@@ -11,7 +17,7 @@ def buybuildingwall():
         buildingshopopener.health= 110
         buildingshopopener.image = wallimage
 
-def buybuildingbank():
+def buybuildingbank(buildingshopopener):
     global money
     global num_banks
     if money >= 450 and buildingshopopener.Building != "bank":
@@ -24,8 +30,7 @@ def buybuildingbank():
 def buy_building(building_name, money):
     pass
 
-
-def buymark2():
+def buymark2(player):
     global money
     global suit
     if money >= 1000 and suit != "markii":
@@ -34,7 +39,7 @@ def buymark2():
         #player.mark2()
         suit = "mark2"
         
-def buymark3():
+def buymark3(player):
     global money
     global suit
     if money >= 5000 and suit != "markiii":
