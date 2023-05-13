@@ -4,7 +4,6 @@ from Settings import BLUE
 class Level(object):
     world_shift = 0
     level_limit = -2720
-    global globalzombie_list
      
     def __init__(self, player):
         self.platform_list = pygame.sprite.Group()
@@ -57,7 +56,6 @@ class Level(object):
     def shift_world(self, shift_x):
         #scrolling
         self.world_shift += shift_x
-
  
         # Go through all the sprite lists and shift
         for platform in self.platform_list:
