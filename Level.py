@@ -11,7 +11,7 @@ class Level(object):
         self.Building_list = pygame.sprite.Group()
         self.zombie_list = pygame.sprite.Group()
         self.bullet_list = pygame.sprite.Group()
-        globalzombie_list = pygame.sprite.Group()
+        self.globalzombie_list = pygame.sprite.Group()
         self.satelite_list = pygame.sprite.Group()
         self.player = player
         self.world_shift=0
@@ -28,7 +28,7 @@ class Level(object):
         self.zombie_list.update()
         self.Building_list.update()
         self.satelite_list.update()
-        globalzombie_list.update()
+        self.globalzombie_list.update()
  
     def draw(self, screen):
  
@@ -41,7 +41,7 @@ class Level(object):
         self.enemy_list.draw(screen)
         self.Building_list.draw(screen)
         self.zombie_list.draw(screen)
-        globalzombie_list.draw(screen)
+        self.globalzombie_list.draw(screen)
         self.satelite_list.draw(screen)
     
     def update(self):
@@ -51,7 +51,7 @@ class Level(object):
         self.bullet_list.update()
         self.zombie_list.update()
         self.satelite_list.update()
-        globalzombie_list.update()
+        self.globalzombie_list.update()
 
     def shift_world(self, shift_x):
         #scrolling
@@ -70,7 +70,7 @@ class Level(object):
         for satelite in self.satelite_list:
             satelite.rect.x += shift_x
 
-        for zombie in globalzombie_list:
+        for zombie in self.globalzombie_list:
             zombie.rect.x+= shift_x
 
         

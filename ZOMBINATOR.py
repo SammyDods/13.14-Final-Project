@@ -52,6 +52,11 @@ wallimage = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,
 wallimage = pygame.transform.scale(wallimage,(350,350))
 lasersound = pygame.mixer.Sound(join_path(dirname(__file__), "Assets", "Audio" ,"laser.wav"))
 
+bankimage = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"bank.png")).convert_alpha()
+bankimage = pygame.transform.scale(bankimage,(350,350))
+wallimage = pygame.image.load(join_path(dirname(__file__), "Assets", "Sprites" ,"Wall.png")).convert_alpha()
+wallimage = pygame.transform.scale(wallimage,(350,350))
+
 player = Player()
 
 
@@ -112,6 +117,8 @@ def main():
     # -------- Main Program Loop -----------
     start1=True
     reload = 15
+    wave = 1
+    banking = 0
     while not done:
         # --- Event Processing
 
@@ -171,7 +178,10 @@ def main():
                 bullet_list.add(bullet)
         cur = pygame.mouse.get_pos()
 
+
         # --- Game logic
+
+        
         reload -= 1
         # Call the update() method on all the sprites
         #Calles wave function when there are no zombies
@@ -184,7 +194,7 @@ def main():
             #print("it worked?!")
         if startingnow == True:
             startingnow=False
-            start()
+            start(gameDisplay)
         active_sprite_list.update()
      
         # Calculate mechanics for each bullet
@@ -243,13 +253,18 @@ def main():
         # If the player gets near the left side, shift the world right (+x)
         if player.rect.left < 0:
             player.rect.left = 0
-            
+
+                
         # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         # Draw all the spites
         current_level.draw(screen)
         active_sprite_list.draw(screen)
+
+        
         zombie_list.draw(screen)
 
+
+        """
         if buildingshop == True:
             button("Buy wall (350)", 650,500,200,100, LIGHT_GREEN, GREEN, action="buywall")
             button("Buy bank (450)", 1110,500,200,100, YELLOW, LIGHT_YELLOW, action="buybank")
@@ -260,8 +275,9 @@ def main():
 
         #score
         moneyscore(money)
+        """
         wavescore(wave)
-
+            
         #if game ends     
         if playerhealth <= 0:
             endgamescreen()
